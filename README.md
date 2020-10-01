@@ -1,1 +1,14 @@
 # WSM-6879A
+=======
+# WSM-6879A
+
+Library to Arduino for WSM-6879A
+
+[Manual PDF](http://read.pudn.com/downloads175/sourcecode/embed/815641/lcd/doc/wsm6879a(MMX2010L).pdf)
+
+# Installation #
+Create a new folder called "WSM-6879A" under the folder named "libraries" in your Arduino sketchbook folder.
+Create the folder "libraries" in case it does not exist yet. Place all the files in the "WSM-6879A" folder.
+
+# Usage #
+To use the library in your own sketch, select it from *Sketch > Import Library*.
