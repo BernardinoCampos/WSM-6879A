@@ -77,15 +77,15 @@ bool WSM6879A::showBattery(int power) {
 		return false;
 
 	if (power>89)
-		lcdBuffer[0x1a] |= 0x08;
+		lcdBuffer[0x00] |= 0x08;
 	if (power>69)
-		lcdBuffer[0x18] |= 0x08;
+		lcdBuffer[0x12] |= 0x08;
 	if (power>49)
 		lcdBuffer[0x14] |= 0x08;
 	if (power>29)
-		lcdBuffer[0x12] |= 0x08;
+		lcdBuffer[0x18] |= 0x08;
 	if (power>9)
-		lcdBuffer[0x00] |= 0x08;
+		lcdBuffer[0x1a] |= 0x08;
 
 	return true;
 }
