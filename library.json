@@ -1,5 +1,5 @@
 {
-  "name": "WSM-6879A",
+  "name": "WSM6879A",
   "keywords": "display, lcd, wsm6879a, ht1621",
   "description": "Library to display WSM-6879A with HT1621 controller.",
   "homepage": "https://github.com/BernardinoCampos/WSM-6879A",
