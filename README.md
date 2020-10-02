@@ -1,6 +1,4 @@
 # WSM-6879A
-=======
-# WSM-6879A
 
 Library to Arduino for WSM-6879A
 
