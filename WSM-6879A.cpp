@@ -122,7 +122,7 @@ bool WSM-6879A::showDecimalPoint(uint8_t pos) {
 void WSM-6879A::writeBuffer() {
 	int ii;
 
-	digitalWrite(CS,LOW);
+	digitalWrite(cs,LOW);
 	waitLcd();
 	writeBit(1);
 	writeBit(0);
@@ -134,7 +134,7 @@ void WSM-6879A::writeBuffer() {
 	for (ii=0; ii<32; ii++)
 		write4Bits(lcdBuffer[ii] & 0x0f);
 
-	digitalWrite(CS,HIGH);
+	digitalWrite(cs,HIGH);
 	waitLcd();
 }
 
