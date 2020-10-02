@@ -15,5 +15,9 @@ begin		KEYWORD2
 reset		KEYWORD2
 printDigit	KEYWORD2
 clear		KEYWORD2
+writeBuffer	KEYWORD2
+showDecimalPoint	KEYWORD2
+showBattery	KEYWORD2
+showAntenna	KEYWORD2
 
 

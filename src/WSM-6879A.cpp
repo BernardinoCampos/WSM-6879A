@@ -4,6 +4,9 @@ WSM6879A::WSM6879A(uint8_t cs, uint8_t clk, uint8_t data) {
 	WSM6879A::cs 	= cs;
 	WSM6879A::clk 	= clk;
 	WSM6879A::data	= data;
+	pinMode(cs, OUTPUT);
+	pinMode(clk, OUTPUT);
+	pinMode(data, OUTPUT);
 }
 
 void WSM6879A::begin() {
@@ -11,11 +14,6 @@ void WSM6879A::begin() {
 	lcdBuffer[28] = 0x08;
 	lcdBuffer[31] = 0x08;
 
-	pinMode(cs, OUTPUT);
-	pinMode(clk, OUTPUT);
-	pinMode(data, OUTPUT);
-	pinMode(2, OUTPUT);
-	digitalWrite(2,HIGH);
 	digitalWrite(cs,HIGH);
 	digitalWrite(clk,HIGH);
 
