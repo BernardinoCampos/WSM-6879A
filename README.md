@@ -1,6 +1,6 @@
 # WSM-6879A
 
-Library to Arduino for WSM-6879A
+Library to Arduino to display WSM-6879A
 
 [Manual PDF](http://read.pudn.com/downloads175/sourcecode/embed/815641/lcd/doc/wsm6879a(MMX2010L).pdf)
 
