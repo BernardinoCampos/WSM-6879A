@@ -12,6 +12,8 @@ void WSM6879A::begin() {
 	pinMode(cs, OUTPUT);
 	pinMode(clk, OUTPUT);
 	pinMode(data, OUTPUT);
+	pinMode(2, OUTPUT);
+	digitalWrite(2,HIGH);
 	digitalWrite(cs,HIGH);
 	digitalWrite(clk,HIGH);
 
