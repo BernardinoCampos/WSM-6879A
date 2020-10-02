@@ -36,6 +36,10 @@ void WSM6879A::reset() {
 	waitLcd();
 }
 
+void WSM6879A::clear() {
+	memset(lcdBuffer, 0, 32);
+}
+
 bool WSM6879A::printDigit(uint8_t pos, uint8_t digit) {
 	if (pos>14 || digit>10)
 		return false;
