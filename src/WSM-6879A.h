@@ -18,7 +18,7 @@ public:
 	* @param data	Data pin of display.
 	*/
 
-	WSM6879A(uint8_t cs, uint8_t clk, uint8_t data	);
+	WSM6879A(uint8_t cs, uint8_t rd, uint8_t clk, uint8_t data	);
 
 	/**
 	 * Set the display in the correct begin state, must be called before anything else is done.
@@ -66,7 +66,7 @@ public:
 
 	void setDebug(bool flag);
 private:
-	uint8_t cs, clk, data;
+	uint8_t cs, rd, clk, data;
 	uint8_t lcdBuffer[32];
 	uint8_t mask [10] = {
 			0x7d,   // 0
