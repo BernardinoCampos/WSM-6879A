@@ -64,6 +64,7 @@ public:
 
 	void writeBuffer ();
 
+	void setDebug(bool flag);
 private:
 	uint8_t cs, clk, data;
 	uint8_t lcdBuffer[32];
@@ -79,6 +80,8 @@ private:
 			0x7f,   // 8
 			0x7b    // 9
 	};
+	bool debug = false;
+
 	void waitLcd();
 	void writeCmd(uint8_t data);
 	void writeByte(uint8_t data);

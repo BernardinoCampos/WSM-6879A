@@ -14,8 +14,11 @@ void WSM6879A::begin() {
 	pinMode(cs, OUTPUT);
 	pinMode(clk, OUTPUT);
 	pinMode(data, OUTPUT);
+	pinMode(2, OUTPUT);
+	digitalWrite(2,HIGH);
 	digitalWrite(cs,HIGH);
 	digitalWrite(clk,HIGH);
+
 	reset();
 	writeBuffer();
 }
@@ -139,6 +142,10 @@ void WSM6879A::writeBuffer() {
 	waitLcd();
 }
 
+void WSM6879A::setDebug(bool flag) {
+	debug = flag;
+}
+
 /*
  * ************** Private Methods *****************
  * */
@@ -148,21 +155,33 @@ void WSM6879A::waitLcd() {
 }
 
 void WSM6879A::writeCmd(uint8_t data) {
+	if (debug)
+		Serial.printf(" %d - ",data);
 	writeByte(data);
 	writeBit(0);
+	Serial.println("");
 }
 
 void WSM6879A::writeByte(uint8_t data) {
+	if (debug)
+		Serial.printf(" %d - ",data);
 	for (int ii=7; ii>=0; ii--)
 		writeBit(data>>ii&1);
+	Serial.println("");
 }
 
 void WSM6879A::write4Bits(uint8_t data) {
+	if (debug)
+		Serial.printf(" %d - ",data);
 	for (int ii=3; ii>=0; ii--)
 		writeBit(data>>ii&1);
+	Serial.println("");
 }
 
 void WSM6879A::writeBit(bool data) {
+	if (debug)
+		Serial.print(data);
+
 	digitalWrite(clk,LOW);
 	digitalWrite(data,(data)?HIGH:LOW);
 	waitLcd();
