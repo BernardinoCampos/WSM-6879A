@@ -7,9 +7,7 @@ WSM6879A::WSM6879A(uint8_t cs, uint8_t clk, uint8_t data) {
 }
 
 void WSM6879A::begin() {
-	memset(lcdBuffer, 0, 32);
-	lcdBuffer[28] = 0x08;
-	lcdBuffer[31] = 0x08;
+	clear();
 
 	pinMode(cs, OUTPUT);
 	pinMode(clk, OUTPUT);
@@ -38,6 +36,8 @@ void WSM6879A::reset() {
 
 void WSM6879A::clear() {
 	memset(lcdBuffer, 0, 32);
+	lcdBuffer[28] = 0x08;
+	lcdBuffer[31] = 0x08;
 }
 
 bool WSM6879A::printDigit(uint8_t pos, uint8_t digit) {
