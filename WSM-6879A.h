@@ -35,16 +35,30 @@ public:
 	bool printDigit(uint8_t pos, uint8_t digit);
 
 	/**
-	 * Remove all the digits currently shown.
+	 * Remove all the digits currently shown (need writeBuffer to display).
 	 */
 
 	void clear();
 
 	/**
-	 * Show Antenna bars in display.
+	 * Show Antenna bars on the LCD  display (rssi in dBm) (need writeBuffer to display).
 	 */
 
-	void setAntenna(int rssi);
+	bool showAntenna(int rssi);
+
+	/**
+	 * Show Battery bars on the LCD  display (power in percentage) (need writeBuffer to display).
+	 */
+
+	bool showBattery(int power);
+
+	/**
+	 * Show Decimal Point on the LCD display in position pos (need writeBuffer to display)
+	 */
+
+	bool showDecimalPoint(uint8_t pos);
+
+	void writeBuffer ();
 
 private:
 	uint8_t cs, clk, data;
