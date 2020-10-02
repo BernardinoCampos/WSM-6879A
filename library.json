@@ -1,0 +1,21 @@
+{
+  "name": "WSM-6879A",
+  "keywords": "display, lcd, wsm6879a, ht1621",
+  "description": "Library to display WSM-6879A with HT1621 controller.",
+  "homepage": "https://github.com/BernardinoCampos/WSM-6879A",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BernardinoCampos/WSM-6879A.git"
+  },
+  "version": "0.8",
+  "authors": {
+    "name": "Bernardino Campos",
+    "url": "https://www.linkedin.com/in/bernardinocampos/"
+  },
+  "exclude": [
+    ".github",
+    "extras"
+  ],
+  "frameworks": "arduino",
+  "platforms": "*"
+}
