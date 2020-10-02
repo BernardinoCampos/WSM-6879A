@@ -83,10 +83,10 @@ private:
 	bool debug = false;
 
 	void waitLcd();
-	void writeCmd(uint8_t data);
-	void writeByte(uint8_t data);
-	void write4Bits(uint8_t data);
-	void writeBit(bool data);
+	void writeCmd(uint8_t val);
+	void writeByte(uint8_t val);
+	void write4Bits(uint8_t val);
+	void writeBit(bool val);
 };
 
 #endif

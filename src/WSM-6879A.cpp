@@ -4,9 +4,6 @@ WSM6879A::WSM6879A(uint8_t cs, uint8_t clk, uint8_t data) {
 	WSM6879A::cs 	= cs;
 	WSM6879A::clk 	= clk;
 	WSM6879A::data	= data;
-	pinMode(cs, OUTPUT);
-	pinMode(clk, OUTPUT);
-	pinMode(data, OUTPUT);
 }
 
 void WSM6879A::begin() {
@@ -14,11 +11,13 @@ void WSM6879A::begin() {
 	lcdBuffer[28] = 0x08;
 	lcdBuffer[31] = 0x08;
 
+	pinMode(cs, OUTPUT);
+	pinMode(clk, OUTPUT);
+	pinMode(data, OUTPUT);
 	digitalWrite(cs,HIGH);
 	digitalWrite(clk,HIGH);
 
 	reset();
-	writeBuffer();
 }
 
 void WSM6879A::reset() {
@@ -152,36 +151,36 @@ void WSM6879A::waitLcd() {
 	delayMicroseconds(50);
 }
 
-void WSM6879A::writeCmd(uint8_t data) {
+void WSM6879A::writeCmd(uint8_t val) {
 	if (debug)
-		Serial.printf(" %d - ",data);
-	writeByte(data);
+		Serial.printf(" %d - ",val);
+	writeByte(val);
 	writeBit(0);
 	Serial.println("");
 }
 
-void WSM6879A::writeByte(uint8_t data) {
+void WSM6879A::writeByte(uint8_t val) {
 	if (debug)
-		Serial.printf(" %d - ",data);
+		Serial.printf(" %d - ",val);
 	for (int ii=7; ii>=0; ii--)
-		writeBit(data>>ii&1);
+		writeBit(val>>ii&1);
 	Serial.println("");
 }
 
-void WSM6879A::write4Bits(uint8_t data) {
+void WSM6879A::write4Bits(uint8_t val) {
 	if (debug)
-		Serial.printf(" %d - ",data);
+		Serial.printf(" %d - ",val);
 	for (int ii=3; ii>=0; ii--)
-		writeBit(data>>ii&1);
+		writeBit(val>>ii&1);
 	Serial.println("");
 }
 
-void WSM6879A::writeBit(bool data) {
+void WSM6879A::writeBit(bool val) {
 	if (debug)
-		Serial.print(data);
+		Serial.print(val);
 
 	digitalWrite(clk,LOW);
-	digitalWrite(data,(data)?HIGH:LOW);
+	digitalWrite(data,(val)?HIGH:LOW);
 	waitLcd();
 	digitalWrite(clk,HIGH);
 	waitLcd();
