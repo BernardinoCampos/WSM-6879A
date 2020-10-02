@@ -1,9 +1,13 @@
-#ifndef WSM-6879A_H
-#define WSM-6879A_H
+#ifndef WSM_6879A_H
+#define WSM_6879A_H
 
 #include <inttypes.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <Arduino.h>
 
-class WSM-6879A {
+class WSM6879A {
 public:
 
 	/**
@@ -14,7 +18,7 @@ public:
 	* @param data	Data pin of display.
 	*/
 
-	void WSM-6879A(uint8_t cs, uint8_t clk, uint8_t data	);
+	WSM6879A(uint8_t cs, uint8_t clk, uint8_t data	);
 
 	/**
 	 * Set the display in the correct begin state, must be called before anything else is done.
@@ -63,7 +67,7 @@ public:
 private:
 	uint8_t cs, clk, data;
 	uint8_t lcdBuffer[32];
-	uint8_t mask [] = {
+	uint8_t mask [10] = {
 			0x7d,   // 0
 			0x60,   // 1
 			0x3e,   // 2

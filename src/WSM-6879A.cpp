@@ -1,12 +1,12 @@
 #include "WSM-6879A.h"
 
-void WSM-6879A::WSM-6879A(uint8_t cs, uint8_t clk, uint8_t data) {
-	WSM-6879A::cs 	= cs;
-	WSM-6879A::clk 	= clk;
-	WSM-6879A::data = data;
+WSM6879A::WSM6879A(uint8_t cs, uint8_t clk, uint8_t data) {
+	WSM6879A::cs 	= cs;
+	WSM6879A::clk 	= clk;
+	WSM6879A::data	= data;
 }
 
-void WSM-6879A::begin() {
+void WSM6879A::begin() {
 	memset(lcdBuffer, 0, 32);
 	lcdBuffer[28] = 0x08;
 	lcdBuffer[31] = 0x08;
@@ -17,9 +17,10 @@ void WSM-6879A::begin() {
 	digitalWrite(cs,HIGH);
 	digitalWrite(clk,HIGH);
 	reset();
+	writeBuffer();
 }
 
-void WSM-6879A::reset() {
+void WSM6879A::reset() {
 	digitalWrite(cs,LOW);
 	waitLcd();
 	writeBit(1);
@@ -35,7 +36,7 @@ void WSM-6879A::reset() {
 	waitLcd();
 }
 
-bool WSM-6879A::printDigit(uint8_t pos, uint8_t digit) {
+bool WSM6879A::printDigit(uint8_t pos, uint8_t digit) {
 	if (pos>14 || digit>10)
 		return false;
 
@@ -46,7 +47,7 @@ bool WSM-6879A::printDigit(uint8_t pos, uint8_t digit) {
 	return true;
 }
 
-bool WSM-6879A::showAntenna(int rssi) {
+bool WSM6879A::showAntenna(int rssi) {
 	if (rssi>0 || rssi<-120)
 		return false;
 
@@ -64,7 +65,7 @@ bool WSM-6879A::showAntenna(int rssi) {
 	return true;
 }
 
-bool WSM-6879A::showBattery(int power) {
+bool WSM6879A::showBattery(int power) {
 	if (power>99)
 		return false;
 
@@ -82,7 +83,7 @@ bool WSM-6879A::showBattery(int power) {
 	return true;
 }
 
-bool WSM-6879A::showDecimalPoint(uint8_t pos) {
+bool WSM6879A::showDecimalPoint(uint8_t pos) {
 	if (pos>9)
 		return false;
 
@@ -119,7 +120,7 @@ bool WSM-6879A::showDecimalPoint(uint8_t pos) {
 	return true;
 }
 
-void WSM-6879A::writeBuffer() {
+void WSM6879A::writeBuffer() {
 	int ii;
 
 	digitalWrite(cs,LOW);
@@ -142,26 +143,26 @@ void WSM-6879A::writeBuffer() {
  * ************** Private Methods *****************
  * */
 
-void WSM-6879A::waitLcd() {
+void WSM6879A::waitLcd() {
 	delayMicroseconds(50);
 }
 
-void WSM-6879A::writeCmd(uint8_t data) {
+void WSM6879A::writeCmd(uint8_t data) {
 	writeByte(data);
 	writeBit(0);
 }
 
-void WSM-6879A::writeByte(uint8_t data) {
+void WSM6879A::writeByte(uint8_t data) {
 	for (int ii=7; ii>=0; ii--)
 		writeBit(data>>ii&1);
 }
 
-void WSM-6879A::write4Bits(uint8_t data) {
+void WSM6879A::write4Bits(uint8_t data) {
 	for (int ii=3; ii>=0; ii--)
 		writeBit(data>>ii&1);
 }
 
-void WSM-6879A::writeBit(bool data) {
+void WSM6879A::writeBit(bool data) {
 	digitalWrite(clk,LOW);
 	digitalWrite(data,(data)?HIGH:LOW);
 	waitLcd();
