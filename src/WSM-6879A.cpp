@@ -59,15 +59,15 @@ bool WSM6879A::showAntenna(int rssi) {
 		return false;
 
 	if (rssi>-60)
-		lcdBuffer[0x1f] |= 0x04;
+		lcdBuffer[0x1e] |= 0x01;
 	if (rssi>-70)
-		lcdBuffer[0x1e] |= 0x08;
+		lcdBuffer[0x1e] |= 0x02;
 	if (rssi>-80)
 		lcdBuffer[0x1e] |= 0x04;
 	if (rssi>-90)
-		lcdBuffer[0x1e] |= 0x02;
+		lcdBuffer[0x1e] |= 0x08;
 	if (rssi>-100)
-		lcdBuffer[0x1e] |= 0x01;
+		lcdBuffer[0x1f] |= 0x04;
 
 	return true;
 }
