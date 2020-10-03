@@ -63,7 +63,7 @@ void WSM6879A::clear() {
 }
 
 bool WSM6879A::printCharacter(uint8_t pos, uint8_t character) {
-	if (pos>14 || character < '0' || character > '9')
+	if (pos>14 || character > 127)
 		return false;
 
 	lcdBuffer[pos*2]	&= (uint8_t) 0x08;
