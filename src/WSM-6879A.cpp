@@ -176,7 +176,7 @@ size_t WSM6879A::write(uint8_t ch) {
 
 size_t WSM6879A::write(const uint8_t *buffer, size_t size) {
 	char tmp [size+1];
-	strncpy(tmp,buffer,size);
+	strncpy(tmp,(const char *)buffer,size);
 	tmp[size]=0;
 	Buffer = tmp;
 
