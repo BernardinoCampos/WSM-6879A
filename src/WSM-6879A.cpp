@@ -180,8 +180,14 @@ size_t WSM6879A::write(uint8_t ch) {
 size_t WSM6879A::write(const uint8_t *buffer, size_t size) {
 	if (size>15)
 		size=15;
-	for(int ii=0; ii<size; ii++)
-		Buffer[ii] = buffer[ii];
+	for(int aa=0, int bb=0; aa<size; aa++, bb++) {
+		if (buffer[aa]=='.') {
+			showDecimalPoint(bb);
+			bb--;
+		}
+		else
+			Buffer[bb] = buffer[aa];
+	}
 
 	writeBuffer();
 }
