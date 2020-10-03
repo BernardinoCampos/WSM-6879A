@@ -169,26 +169,16 @@ void WSM6879A::writeBuffer() {
 }
 
 size_t WSM6879A::write(uint8_t ch) {
-	for(int ii=15; ii>0; ii--)
-		Buffer[ii] = Buffer[ii-1];
-
-	Buffer[0] = ch;
+	Buffer.concat(ch);
 
 	writeBuffer();
 }
 
 size_t WSM6879A::write(const uint8_t *buffer, size_t size) {
-	int aa,bb;
-	if (size>15)
-		size=15;
-	for(aa=0, bb=0; aa<size; aa++, bb++) {
-		if (buffer[aa]=='.') {
-			showDecimalPoint(bb);
-			bb--;
-		}
-		else
-			Buffer[bb] = buffer[aa];
-	}
+	char tmp [size+1];
+	strncpy(tmp,buffer,size);
+	tmp[size]=0;
+	Buffer = tmp;
 
 	writeBuffer();
 }

@@ -75,7 +75,7 @@ public:
 private:
 	uint8_t cs, rd, clk, data;
 	uint8_t lcdBuffer[32];
-	char Buffer [15];
+	String Buffer;
 	uint8_t mask [127];
 	bool debug = false;
 
