@@ -6,7 +6,7 @@ WSM6879A::WSM6879A(uint8_t cs, uint8_t rd, uint8_t clk, uint8_t data) {
 	WSM6879A::clk 	= clk;
 	WSM6879A::data	= data;
 
-	menset(mask, 0, 127);
+	memset(mask, 0, 127);
 	mask['0'] = 0x7d;
 	mask['1'] = 0x60;
 	mask['2'] = 0x3e;
