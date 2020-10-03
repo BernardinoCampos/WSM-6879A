@@ -150,7 +150,7 @@ void WSM6879A::writeBuffer() {
 	int ii;
 
 	for(ii=0; ii<15; ii++)
-		printCharacter(15-ii,Buffer[ii]);
+		printCharacter(14-ii,Buffer[ii]);
 
 	digitalWrite(cs,LOW);
 	waitLcd();
