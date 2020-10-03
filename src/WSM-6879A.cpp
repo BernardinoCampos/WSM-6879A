@@ -149,6 +149,9 @@ bool WSM6879A::showDecimalPoint(uint8_t pos) {
 void WSM6879A::writeBuffer() {
 	int ii;
 
+	for(ii=0; ii<15; ii++)
+		printCharacter(ii,Buffer[ii]);
+
 	digitalWrite(cs,LOW);
 	waitLcd();
 	writeBit(1);
