@@ -7,13 +7,14 @@
 #include <string.h>
 #include <Arduino.h>
 
-class WSM6879A {
+class WSM6879A: public Print {
 public:
 
 	/**
 	* Constructor
 	*
 	* @param cs 	CS pin of display.
+	* @param rd		RD pin of display.
 	* @param clk	CLK pin of display.
 	* @param data	Data pin of display.
 	*/
@@ -33,10 +34,10 @@ public:
 	void reset();
 
 	/**
-	 * Show the digit on the LCD display in the position pos.
+	 * Show the character (if possible) on the LCD display in the position pos.
 	 */
 
-	bool printDigit(uint8_t pos, uint8_t digit);
+	bool printCharacter(uint8_t pos, uint8_t digit);
 
 	/**
 	 * Remove all the digits currently shown (need writeBuffer to display).
@@ -62,24 +63,20 @@ public:
 
 	bool showDecimalPoint(uint8_t pos);
 
+	/**
+	 * Send buffer to the LCD display.
+	 */
+
 	void writeBuffer ();
 
-	void setDebug(bool flag);
+	virtual size_t write(uint8_t);
+	virtual size_t write(const uint8_t *, size_t);
+
 private:
 	uint8_t cs, rd, clk, data;
 	uint8_t lcdBuffer[32];
-	uint8_t mask [10] = {
-			0x7d,   // 0
-			0x60,   // 1
-			0x3e,   // 2
-			0x7a,   // 3
-			0x63,   // 4
-			0x5b,   // 5
-			0x5f,   // 6
-			0x70,   // 7
-			0x7f,   // 8
-			0x7b    // 9
-	};
+	char Buffer [15];
+	uint8_t mask [127];
 	bool debug = false;
 
 	void waitLcd();

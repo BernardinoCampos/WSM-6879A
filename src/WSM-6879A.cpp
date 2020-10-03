@@ -5,6 +5,25 @@ WSM6879A::WSM6879A(uint8_t cs, uint8_t rd, uint8_t clk, uint8_t data) {
 	WSM6879A::rd 	= rd;
 	WSM6879A::clk 	= clk;
 	WSM6879A::data	= data;
+
+	menset(mask, 0, 127);
+	mask['0'] = 0x7d;
+	mask['1'] = 0x60;
+	mask['2'] = 0x3e;
+	mask['3'] = 0x7a;
+	mask['4'] = 0x63;
+	mask['5'] = 0x5b;
+	mask['6'] = 0x5f;
+	mask['7'] = 0x70;
+	mask['8'] = 0x7f;
+	mask['9'] = 0x7b;
+	mask['?'] = 0x36;
+	mask['A'] = mask['a'] = 0x77;
+	mask['B'] = mask['b'] = 0x4f;
+	mask['C'] = mask['c'] = 0x1d;
+	mask['D'] = mask['d'] = 0x6e;
+	mask['E'] = mask['e'] = 0x1f;
+	mask['F'] = mask['f'] = 0x17;
 }
 
 void WSM6879A::begin() {
@@ -43,13 +62,13 @@ void WSM6879A::clear() {
 	lcdBuffer[31] = 0x08;
 }
 
-bool WSM6879A::printDigit(uint8_t pos, uint8_t digit) {
-	if (pos>14 || digit>10)
+bool WSM6879A::printCharacter(uint8_t pos, uint8_t character) {
+	if (pos>14 || character < '0' || character > '9')
 		return false;
 
 	lcdBuffer[pos*2]	&= (uint8_t) 0x08;
-	lcdBuffer[pos*2]	|= (uint8_t) (mask[digit]>>4);
-	lcdBuffer[pos*2+1]	=  (uint8_t) (mask[digit] & 0x0f);
+	lcdBuffer[pos*2]	|= (uint8_t) (mask[character]>>4);
+	lcdBuffer[pos*2+1]	=  (uint8_t) (mask[character] & 0x0f);
 
 	return true;
 }
@@ -146,8 +165,22 @@ void WSM6879A::writeBuffer() {
 	waitLcd();
 }
 
-void WSM6879A::setDebug(bool flag) {
-	debug = flag;
+size_t WSM6879A::write(uint8_t ch) {
+	for(int ii=15; ii>0; ii--)
+		Buffer[ii] = Buffer[ii-1];
+
+	Buffer[0] = ch;
+
+	writeBuffer();
+}
+
+size_t WSM6879A::write(const uint8_t *buffer, size_t size) {
+	if (size>15)
+		size=15;
+	for(int ii=0; ii<size; ii++)
+		Buffer[ii] = buffer[ii];
+
+	writeBuffer();
 }
 
 /*
@@ -159,33 +192,21 @@ void WSM6879A::waitLcd() {
 }
 
 void WSM6879A::writeCmd(uint8_t val) {
-	if (debug)
-		Serial.printf(" %d - ",val);
 	writeByte(val);
 	writeBit(0);
-	Serial.println("");
 }
 
 void WSM6879A::writeByte(uint8_t val) {
-	if (debug)
-		Serial.printf(" %d - ",val);
 	for (int ii=7; ii>=0; ii--)
 		writeBit(val>>ii&1);
-	Serial.println("");
 }
 
 void WSM6879A::write4Bits(uint8_t val) {
-	if (debug)
-		Serial.printf(" %d - ",val);
 	for (int ii=3; ii>=0; ii--)
 		writeBit(val>>ii&1);
-	Serial.println("");
 }
 
 void WSM6879A::writeBit(bool val) {
-	if (debug)
-		Serial.print(val);
-
 	digitalWrite(clk,LOW);
 	digitalWrite(data,(val)?HIGH:LOW);
 	waitLcd();
