@@ -178,9 +178,10 @@ size_t WSM6879A::write(uint8_t ch) {
 }
 
 size_t WSM6879A::write(const uint8_t *buffer, size_t size) {
+	int aa,bb;
 	if (size>15)
 		size=15;
-	for(int aa=0, int bb=0; aa<size; aa++, bb++) {
+	for(aa=0, bb=0; aa<size; aa++, bb++) {
 		if (buffer[aa]=='.') {
 			showDecimalPoint(bb);
 			bb--;
