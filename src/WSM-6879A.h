@@ -79,6 +79,7 @@ private:
 	uint8_t mask [127];
 	bool debug = false;
 
+	bool isJustDigits(String str)
 	void waitLcd();
 	void writeCmd(uint8_t val);
 	void writeByte(uint8_t val);

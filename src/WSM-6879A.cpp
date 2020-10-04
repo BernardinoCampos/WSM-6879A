@@ -149,8 +149,20 @@ bool WSM6879A::showDecimalPoint(uint8_t pos) {
 void WSM6879A::writeBuffer() {
 	int ii;
 
+	if (isJustDigits(Buffer)) {
+		Buffer.trim();
+		int ptrBuffer=0;
+		int ptrLcd=(15-Buffer.length());
+		for(;PtrLcd>0;ptrBuffer++) {
+			if (Buffer.charAt(ptrBuffer) != '.')
+				printCharacter(ii++, Buffer[ptrBuffer);
+			else
+				showDecimalPoint(ii-6);
+		}
+	}
+
 	for(ii=0; ii<15; ii++)
-		printCharacter(14-ii,Buffer[ii]);
+		printCharacter(14-ii,Buffer.charAt(ii));
 
 	digitalWrite(cs,LOW);
 	waitLcd();
@@ -186,6 +198,16 @@ size_t WSM6879A::write(const uint8_t *buffer, size_t size) {
 /*
  * ************** Private Methods *****************
  * */
+
+bool isJustDigits(String str) {
+	for (int ii=0; ii<str.length(); ii++) {
+		char ch;
+		ch = str.charAt(ii);
+		if (ch!=' ' && ch!='.' && !isDigit(ch))
+			return false;
+	}
+	return true;
+}
 
 void WSM6879A::waitLcd() {
 	delayMicroseconds(50);
