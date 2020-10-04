@@ -163,7 +163,8 @@ void WSM6879A::writeBuffer() {
 		}
 	}
 	else
-		Serial.println("Nao Digito");
+		for (int ii=0; ii<Buffer.length(); ii++)
+			printCharacter(ii, Buffer.charAt(ii));
 
 	writeLcdBuffer();
 }
