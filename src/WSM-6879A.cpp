@@ -151,11 +151,11 @@ void WSM6879A::writeBuffer() {
 
 	if (isJustDigits(Buffer)) {
 		Buffer.trim();
-		int ptrBuffer=0;
-		int ptrLcd=(15-Buffer.length());
+		int ptrBuffer = 0;
+		int ptrLcd = (15-Buffer.length());
 		for(;PtrLcd>0;ptrBuffer++) {
 			if (Buffer.charAt(ptrBuffer) != '.')
-				printCharacter(ii++, Buffer[ptrBuffer);
+				printCharacter(ii++, Buffer.charAt(ptrBuffer));
 			else
 				showDecimalPoint(ii-6);
 		}
