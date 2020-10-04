@@ -148,8 +148,6 @@ bool WSM6879A::showDecimalPoint(uint8_t pos) {
 }
 
 void WSM6879A::writeBuffer() {
-	int ii;
-
 	if (isJustDigits(Buffer)) {
 		Buffer.trim();
 		delay(500);
@@ -171,6 +169,8 @@ void WSM6879A::writeBuffer() {
 }
 
 void WSM6879A::writeLcdBuffer() {
+	int ii;
+
 	digitalWrite(cs,LOW);
 	waitLcd();
 	writeBit(1);
