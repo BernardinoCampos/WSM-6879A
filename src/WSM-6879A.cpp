@@ -152,6 +152,8 @@ void WSM6879A::writeBuffer() {
 	if (isJustDigits(Buffer)) {
 		Serial.println("Digito");
 		Buffer.trim();
+		Serial.println(Buffer);
+		delay(500);
 		int ptrBuffer = 0;
 		int ptrLcd = (15-Buffer.length());
 		for(;ptrLcd>0;ptrBuffer++) {
@@ -160,7 +162,6 @@ void WSM6879A::writeBuffer() {
 			else
 				showDecimalPoint(ptrLcd-6);
 		}
-		Serial.println(Buffer);
 	}
 	else
 		Serial.println("Nao Digito");
