@@ -109,36 +109,37 @@ bool WSM6879A::showBattery(int power) {
 	return true;
 }
 
+bool WSM6879A::showdoublePoint() {
+	lcdBuffer[0x1f] |= 0x02;
+}
+
 bool WSM6879A::showDecimalPoint(uint8_t pos) {
-	if (pos>9)
+	if (pos>7)
 		return false;
 
 	switch(pos) {
-		case(9):
-			lcdBuffer[0x1f] |= 0x02;
-			break;
-		case (8):
+		case (7):
 			lcdBuffer[0x10] |= 0x08;
 			break;
-		case (7):
+		case (6):
 			lcdBuffer[0x0e] |= 0x08;
 			break;
-		case (6):
+		case (5):
 			lcdBuffer[0x0c] |= 0x08;
 			break;
-		case (5):
+		case (4):
 			lcdBuffer[0x0a] |= 0x08;
 			break;
-		case (4):
+		case (3):
 			lcdBuffer[0x08] |= 0x08;
 			break;
-		case (3):
+		case (2):
 			lcdBuffer[0x06] |= 0x08;
 			break;
-		case (2):
+		case (1):
 			lcdBuffer[0x04] |= 0x08;
 			break;
-		case (1):
+		case (0):
 			lcdBuffer[0x02] |= 0x08;
 			break;
 	}
@@ -166,6 +167,10 @@ void WSM6879A::writeBuffer() {
 	else
 		Serial.println("Nao Digito");
 
+	writeLcdBuffer();
+}
+
+void WSM6879A::writeLcdBuffer() {
 	digitalWrite(cs,LOW);
 	waitLcd();
 	writeBit(1);
