@@ -199,7 +199,7 @@ size_t WSM6879A::write(const uint8_t *buffer, size_t size) {
  * ************** Private Methods *****************
  * */
 
-bool isJustDigits(String str) {
+bool WSM6879A::isJustDigits(String str) {
 	for (int ii=0; ii<str.length(); ii++) {
 		char ch;
 		ch = str.charAt(ii);
