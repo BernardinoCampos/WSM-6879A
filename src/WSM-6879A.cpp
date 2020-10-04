@@ -161,9 +161,6 @@ void WSM6879A::writeBuffer() {
 		}
 	}
 
-	for(ii=0; ii<15; ii++)
-		printCharacter(14-ii,Buffer.charAt(ii));
-
 	digitalWrite(cs,LOW);
 	waitLcd();
 	writeBit(1);
