@@ -159,6 +159,7 @@ void WSM6879A::writeBuffer() {
 			else
 				showDecimalPoint(ptrLcd-6);
 		}
+		Serial.println(Buffer);
 	}
 
 	digitalWrite(cs,LOW);
