@@ -153,7 +153,7 @@ void WSM6879A::writeBuffer() {
 		Buffer.trim();
 		int ptrBuffer = 0;
 		int ptrLcd = (15-Buffer.length());
-		for(;PtrLcd>0;ptrBuffer++) {
+		for(;ptrLcd>0;ptrBuffer++) {
 			if (Buffer.charAt(ptrBuffer) != '.')
 				printCharacter(ii++, Buffer.charAt(ptrBuffer));
 			else
