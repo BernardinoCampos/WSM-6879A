@@ -150,6 +150,7 @@ void WSM6879A::writeBuffer() {
 	int ii;
 
 	if (isJustDigits(Buffer)) {
+		Serial.println("É só dígito");
 		Buffer.trim();
 		int ptrBuffer = 0;
 		int ptrLcd = (15-Buffer.length());
@@ -161,6 +162,8 @@ void WSM6879A::writeBuffer() {
 		}
 		Serial.println(Buffer);
 	}
+	else
+		Serial.println("Não é só dígito");
 
 	digitalWrite(cs,LOW);
 	waitLcd();
