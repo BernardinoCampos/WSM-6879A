@@ -153,7 +153,7 @@ void WSM6879A::writeBuffer() {
 		delay(500);
 		int ptrBuffer = 0;
 		int ptrLcd = (15-Buffer.length());
-		for(;ptrLcd<15>;ptrBuffer++) {
+		for(;ptrLcd<15;ptrBuffer++) {
 			char ch = Buffer.charAt(ptrBuffer);
 			Serial.printf("ptrBuffer=%d ptrLcd=%d ch=%c\n",ptrBuffer,ptrLcd,ch);
 			if ( ch != '.')
