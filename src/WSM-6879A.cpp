@@ -153,17 +153,17 @@ void WSM6879A::writeBuffer() {
 		delay(500);
 		int ptrBuffer = 0;
 		int ptrLcd = (15-Buffer.length());
-		for(;ptrLcd>0;ptrBuffer++) {
+		for(;ptrLcd<15>;ptrBuffer++) {
 			char ch = Buffer.charAt(ptrBuffer);
 			Serial.printf("ptrBuffer=%d ptrLcd=%d ch=%c\n",ptrBuffer,ptrLcd,ch);
 			if ( ch != '.')
-				printCharacter(ptrLcd--, ch);
+				printCharacter(ptrLcd++, ch);
 			else
 				showDecimalPoint(ptrLcd-6);
 		}
 	}
 	else
-		for (int ii=0; ii<Buffer.length(); ii++)
+		for (int ii=0; ii<Buffer.length() && ii<15; ii++)
 			printCharacter(ii, Buffer.charAt(ii));
 
 	writeLcdBuffer();
