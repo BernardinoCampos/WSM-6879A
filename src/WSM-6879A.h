@@ -63,14 +63,19 @@ public:
 
 	bool showDecimalPoint(uint8_t pos);
 
-	/**
-	 * Send buffer to the LCD display.
-	 */
-
 	bool showdoublePoint();
 
-	void writeBuffer ();
+	/**
+	 * Send LcdBuffer to the LCD display.
+	 */
+
 	void writeLcdBuffer();
+
+	/**
+	 * Send Buffer to the LcdBuffer.
+	 */
+
+	void writeBuffer ();
 
 	virtual size_t write(uint8_t);
 	virtual size_t write(const uint8_t *, size_t);
