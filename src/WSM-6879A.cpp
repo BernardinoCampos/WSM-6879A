@@ -159,7 +159,7 @@ void WSM6879A::writeBuffer() {
 			if ( ch != '.')
 				printCharacter(ptrLcd++, ch);
 			else
-				showDecimalPoint(ptrLcd-6);
+				showDecimalPoint(ptrLcd-7);
 		}
 	}
 	else
