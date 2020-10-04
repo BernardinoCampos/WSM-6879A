@@ -150,15 +150,13 @@ void WSM6879A::writeBuffer() {
 	int ii;
 
 	if (isJustDigits(Buffer)) {
-		Serial.println("Digito");
 		Buffer.trim();
-		Serial.println(Buffer);
 		delay(500);
 		int ptrBuffer = 0;
 		int ptrLcd = (15-Buffer.length());
 		for(;ptrLcd>0;ptrBuffer++) {
 			char ch = Buffer.charAt(ptrBuffer);
-			Serial.println(ch);
+			Serial.printf("ptrBuffer=%d ptrLcd=%d ch=%c\n",ptrBuffer,ptrLcd,ch);
 			if ( ch != '.')
 				printCharacter(ptrLcd--, ch);
 			else
@@ -208,7 +206,6 @@ bool WSM6879A::isJustDigits(String str) {
 		char ch;
 		ch = str.charAt(ii);
 		if (ch!=' ' && ch!='.' && !isDigit(ch)) {
-			Serial.println(ch);
 			return false;
 		}
 	}
