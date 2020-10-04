@@ -200,8 +200,10 @@ bool WSM6879A::isJustDigits(String str) {
 	for (int ii=0; ii<str.length(); ii++) {
 		char ch;
 		ch = str.charAt(ii);
-		if (ch!=' ' && ch!='.' && !isDigit(ch))
+		if (ch!=' ' && ch!='.' && !isDigit(ch)) {
+			Serial.println(ch);
 			return false;
+		}
 	}
 	return true;
 }
