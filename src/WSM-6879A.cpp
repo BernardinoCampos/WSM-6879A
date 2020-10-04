@@ -118,28 +118,28 @@ bool WSM6879A::showDecimalPoint(uint8_t pos) {
 		return false;
 
 	switch(pos) {
-		case (7):
+		case (0):
 			lcdBuffer[0x10] |= 0x08;
 			break;
-		case (6):
+		case (1):
 			lcdBuffer[0x0e] |= 0x08;
 			break;
-		case (5):
+		case (2):
 			lcdBuffer[0x0c] |= 0x08;
 			break;
-		case (4):
+		case (3):
 			lcdBuffer[0x0a] |= 0x08;
 			break;
-		case (3):
+		case (4):
 			lcdBuffer[0x08] |= 0x08;
 			break;
-		case (2):
+		case (5):
 			lcdBuffer[0x06] |= 0x08;
 			break;
-		case (1):
+		case (6):
 			lcdBuffer[0x04] |= 0x08;
 			break;
-		case (0):
+		case (7):
 			lcdBuffer[0x02] |= 0x08;
 			break;
 	}
