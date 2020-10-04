@@ -155,9 +155,9 @@ void WSM6879A::writeBuffer() {
 		int ptrLcd = (15-Buffer.length());
 		for(;ptrLcd>0;ptrBuffer++) {
 			if (Buffer.charAt(ptrBuffer) != '.')
-				printCharacter(ii++, Buffer.charAt(ptrBuffer));
+				printCharacter(ptrLcd++, Buffer.charAt(ptrBuffer));
 			else
-				showDecimalPoint(ii-6);
+				showDecimalPoint(ptrLcd-6);
 		}
 	}
 
