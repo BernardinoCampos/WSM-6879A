@@ -60,6 +60,7 @@ void WSM6879A::clear() {
 	memset(lcdBuffer, 0, 32);
 	lcdBuffer[28] = 0x08;
 	lcdBuffer[31] = 0x08;
+	Buffer="";
 }
 
 bool WSM6879A::printCharacter(uint8_t pos, uint8_t character) {
