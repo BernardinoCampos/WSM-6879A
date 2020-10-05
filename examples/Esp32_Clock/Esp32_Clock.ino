@@ -5,7 +5,7 @@ WSM6879A wsm(4,2,15,5);		// Change for your configuration
 
 const char* ssid     = "<<SSID>>";
 const char* password = "<<PASSWORD>>";
-const char* ntpServer = "200.160.0.8";
+const char* ntpServer = "200.160.0.8";		// NTP server IP
 const long  gmtOffset_sec = 0;
 const int   daylightOffset_sec = 3600;
 long rssi;
@@ -14,9 +14,6 @@ void setup() {
 
     IPAddress ip;
     
-    Serial.begin(115200);
-    Serial.println("Iniciando");
-
     wsm.begin();
 
     WiFi.begin(ssid, password);
@@ -32,7 +29,7 @@ void setup() {
     wsm.showAntenna(WiFi.RSSI());
     wsm.printf("%d-%d-%d-%d",ip[0],ip[1],ip[2],ip[3]);
 
-    delay(4000);
+    delay(3000);
     
     configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
 
@@ -40,14 +37,13 @@ void setup() {
 }
 
 void loop() {
-    Serial.println("Loop...");
-
     wsm.clear();
+
     wsm.showAntenna(WiFi.RSSI());
 
     wsm.printLocalTime();
 
     wsm.writeBuffer();
 
-    delay(1500);
+    delay(250);
 }
