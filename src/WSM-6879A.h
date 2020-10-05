@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <Arduino.h>
 
 class WSM6879A: public Print {
@@ -38,6 +39,12 @@ public:
 	 */
 
 	bool printCharacter(uint8_t pos, uint8_t digit);
+
+	/**
+	 * Show the localtime on the LCD display.
+	 */
+
+	void printLocalTime();
 
 	/**
 	 * Remove all the digits currently shown (need writeLcdBuffer to display).

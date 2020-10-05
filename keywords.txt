@@ -13,10 +13,13 @@ WSM-6879A	KEYWORD1
 ###########################################
 begin		KEYWORD2
 reset		KEYWORD2
-printDigit	KEYWORD2
+printCharacter	KEYWORD2
+printLocalTime	KEYWORD2
 clear		KEYWORD2
 writeBuffer	KEYWORD2
 showDecimalPoint	KEYWORD2
+showdoublePoint		KEYWORD2
+writeLcdBuffer		KEYWORD2
 showBattery	KEYWORD2
 showAntenna	KEYWORD2
 

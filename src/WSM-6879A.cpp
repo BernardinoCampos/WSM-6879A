@@ -18,6 +18,8 @@ WSM6879A::WSM6879A(uint8_t cs, uint8_t rd, uint8_t clk, uint8_t data) {
 	mask['8'] = 0x7f;
 	mask['9'] = 0x7b;
 	mask['?'] = 0x36;
+	mask['-'] = 0x02;
+	mask['_'] = 0x08;
 	mask['A'] = mask['a'] = 0x77;
 	mask['B'] = mask['b'] = 0x4f;
 	mask['C'] = mask['c'] = 0x1d;
@@ -151,12 +153,10 @@ bool WSM6879A::showDecimalPoint(uint8_t pos) {
 void WSM6879A::writeBuffer() {
 	if (isJustDigits(Buffer)) {
 		Buffer.trim();
-		delay(500);
 		int ptrBuffer = 0;
 		int ptrLcd = (15-Buffer.length());
 		for(;ptrLcd<15;ptrBuffer++) {
 			char ch = Buffer.charAt(ptrBuffer);
-			Serial.printf("ptrBuffer=%d ptrLcd=%d ch=%c\n",ptrBuffer,ptrLcd,ch);
 			if ( ch != '.')
 				printCharacter(ptrLcd++, ch);
 			else
@@ -189,13 +189,42 @@ void WSM6879A::writeLcdBuffer() {
 	waitLcd();
 }
 
+void WSM6879A::printLocalTime() {
+	struct tm timeinfo;
+
+	if(!getLocalTime(&timeinfo)){
+		Serial.println("Failed to obtain time");
+		return;
+	}
+
+	printCharacter(1, timeinfo.tm_hour/10+'0');
+	printCharacter(2, timeinfo.tm_hour%10+'0');
+	printCharacter(4, timeinfo.tm_min/10+'0');
+	printCharacter(5, timeinfo.tm_min%10+'0');
+    
+	if (timeinfo.tm_sec%2==0)
+		showdoublePoint();
+
+	printCharacter(7, timeinfo.tm_mday/10+'0');
+	printCharacter(8, timeinfo.tm_mday%10+'0');
+	printCharacter(9, '-');
+	printCharacter(10, (timeinfo.tm_mon+1)/10+'0');
+	printCharacter(11, (timeinfo.tm_mon+1)%10+'0');
+	printCharacter(12, '-');
+	printCharacter(13,  (timeinfo.tm_year-100)/10+'0');
+	printCharacter(14,  (timeinfo.tm_year-100)%10+'0');
+}
+
 size_t WSM6879A::write(uint8_t ch) {
 	Buffer.concat(ch);
-
 	writeBuffer();
 }
 
 size_t WSM6879A::write(const uint8_t *buffer, size_t size) {
+
+
+	if (size>15)
+		size=15;
 	char tmp [size+1];
 	strncpy(tmp,(const char *)buffer,size);
 	tmp[size]=0;
@@ -220,7 +249,7 @@ bool WSM6879A::isJustDigits(String str) {
 }
 
 void WSM6879A::waitLcd() {
-	delayMicroseconds(50);
+	delayMicroseconds(5);
 }
 
 void WSM6879A::writeCmd(uint8_t val) {
